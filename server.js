@@ -4,6 +4,11 @@ http = require("http");
 const cors = require("cors");
 const { Server } = require("socket.io");
 
+//리액트 연결 path
+const path = require("path");
+const _dirname = path.dirname("");
+const buildPath = path.join(_dirname, "./client/build");
+app.use(express.static(buildPath));
 app.use(cors());
 {
   /* io.emit  : 접속해있는 모든 유저들에게 */
@@ -127,4 +132,13 @@ io.on("connection", (socket) => {
   });
 });
 
-server.listen(80, () => console.log("80에서 돌아가는 중"));
+// 리액트 연결
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "../client/build/index.html"), function (err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
+
+server.listen(80, () => console.log("80에서 돌아가는 중!"));
