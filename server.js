@@ -33,6 +33,7 @@ let chatRoom = "";
 let 모든유저 = [];
 let 유저카운트 = [];
 let 관전유저 = [];
+let 남은유저 = [];
 
 let point = 0;
 let win = 0;
@@ -311,7 +312,7 @@ io.on("connection", (socket) => {
       console.log(`${username}가 방을 떠났습니다.`);
 
       console.log("후반", 관전유저);
-      let 남은유저 = 모든유저.filter((e) => e.username != data.username);
+      남은유저 = 모든유저.filter((e) => e.username != data.username);
 
       // 남은 애들을 모든유저와 유저카운트에 넣어주고
       유저카운트 = 남은유저;
@@ -324,17 +325,9 @@ io.on("connection", (socket) => {
     // 유저 연결 끊겼을 때
     socket.on("disconnect", () => {
       console.log(`🥐: ${socket.id} 유저연결 해제!`);
-      // 모든 유저들에 들어있던 user가 방금 나간애랑 같다면 -> 나간애 지정
+
       const user = 모든유저.find((user) => user.id == socket.id);
-      // 방금 나간애 이름이 이 socket.id라면 걔 빼고 Chatroom_users에게 남은 유저들로 구성함을 알림
-      if (user.username) {
-        모든유저 = leaveRoom(socket.id, 모든유저);
-        socket.to(chatRoom).emit("chatroom_users", 모든유저);
-        // 나머지 애들한테 방금 나간 애 연결 끊겼다고 선언
-        socket.to(chatRoom).emit("receive_message", {
-          message: `🥐: ${user.username}의 연결이 종료 되었습니다!`,
-        });
-      }
+      남은유저 = 모든유저.filter((e) => e.username != data.username);
     });
   });
 });
@@ -444,7 +437,7 @@ let station = [
 
 // 리액트 연결
 app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "../client/build/index.html"), function (err) {
+  res.sendFile(path.join(__dirname, "/client/build/index.html"), function (err) {
     if (err) {
       res.status(500).send(err);
     }
