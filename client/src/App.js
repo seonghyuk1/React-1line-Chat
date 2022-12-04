@@ -7,7 +7,8 @@ import Chat from "./Pages/Home/Chat/Chat";
 import Home from "./Pages/Home/Home.js";
 import Result from "./Pages/Home/Chat/Result";
 
-const socket = io.connect("http://34.231.209.142/");
+// const socket = io.connect("http://34.231.209.142/");
+const socket = io.connect("http://localhost:80");
 
 function App() {
   // 사용자 이름 전달
