@@ -327,7 +327,7 @@ io.on("connection", (socket) => {
       // 모든 유저들에 들어있던 user가 방금 나간애랑 같다면 -> 나간애 지정
       const user = 모든유저.find((user) => user.id == socket.id);
       // 방금 나간애 이름이 이 socket.id라면 걔 빼고 Chatroom_users에게 남은 유저들로 구성함을 알림
-      if (user?.username) {
+      if (user.username) {
         모든유저 = leaveRoom(socket.id, 모든유저);
         socket.to(chatRoom).emit("chatroom_users", 모든유저);
         // 나머지 애들한테 방금 나간 애 연결 끊겼다고 선언
