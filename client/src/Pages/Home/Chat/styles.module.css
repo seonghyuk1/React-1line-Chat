@@ -4,8 +4,12 @@
   max-width: 1100px;
   margin: 0 auto;
   display: grid;
-  grid-template-columns: 1fr 4fr;
+  grid-template-columns: 2fr 4fr;
   gap: 20px;
+  /* height: 400px; */
+  margin: 1%;
+  align-items: center;
+  padding-left: 10%;
 }
 
 /* Room and users component */
@@ -13,7 +17,7 @@
   border-right: 1px solid #dfdfdf;
 }
 .roomTitle {
-  margin-bottom: 60px;
+  /* margin-bottom: 60px; */
   text-transform: uppercase;
   font-size: 2rem;
   color: #fff;
@@ -25,7 +29,7 @@
 .usersList {
   list-style-type: none;
   padding-left: 0;
-  margin-bottom: 60px;
+  /* margin-bottom: 60px; */
   color: rgb(153, 217, 234);
 }
 .usersList li {
@@ -34,7 +38,7 @@
 
 /* Messages */
 .messagesColumn {
-  height: 85vh;
+  height: 80vh;
   overflow: auto;
   padding: 10px 10px 10px 40px;
 }
@@ -55,13 +59,18 @@
 
 /* Message input and button */
 .sendMessageContainer {
-  padding: 16px 20px 20px 16px;
+  /* padding: 5% 4%; */
+  padding-top: 5%;
+  margin-left: 10%;
+  display: flex;
+  align-items: center;
 }
 .messageInput {
   padding: 14px;
   margin-right: 16px;
-  width: 60%;
+  width: 70%;
   border-radius: 6px;
   border: 1px solid rgb(153, 217, 234);
   font-size: 0.9rem;
+  align-items: center;
 }
